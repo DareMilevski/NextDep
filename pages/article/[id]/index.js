@@ -29,33 +29,33 @@ const article = ({ article }) => {
 //   };
 // };
 
-// export const getStaticPaths = async () => {
-//   const res = await fetch(`${server}/api/articles`);
-  
-//   const articles = await res.json();
-//   console.log(articles)
-//   const ids = articles.map((article) => article.id);
-//   const paths = ids.map((id) => ({ params: { id: id.toString() } }));
+export const getStaticPaths = async () => {
+  const res = await fetch(`${server}/api/articles`);
 
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
+  const articles = await res.json();
+  console.log(articles);
+  const ids = articles.map((article) => article.id);
+  const paths = ids.map((id) => ({ params: { id: id.toString() } }));
 
-// export const getStaticProps = async (context) => {
-//   const res = await fetch(
-//     `https://jsonplaceholder.typicode.com/posts/${context.params.id}`
-//   )
+  return {
+    paths,
+    fallback: false,
+  };
+};
 
-//   const article = await res.json()
+export const getStaticProps = async (context) => {
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${context.params.id}`
+  );
 
-//   return {
-//     props: {
-//       article,
-//     },
-//   }
-// }
+  const article = await res.json();
+
+  return {
+    props: {
+      article,
+    },
+  };
+};
 
 // export const getStaticPaths = async () => {
 //   const res = await fetch(`https://jsonplaceholder.typicode.com/posts`)
